@@ -4,17 +4,22 @@ import java.time.*;
 public class lab01e03 {
     public static final long Max = 1000000000L;
     private static int tasksLeft;
-    public static final int numberOfTasks = 4;
+    public static final int numberOfTasks = 64;
     private static LocalTime mainstart;
     public static void main(String[] args) {
         mainstart = LocalTime.now();
         System.out.println("Main thread started at " + mainstart);
         tasksLeft = numberOfTasks;
+        int totalRun = 0;
 
         for(int i = 0; i<numberOfTasks; i++){
+            task(i);
             LocalTime finish = LocalTime.now();
             System.out.println("Main thread ended at " + finish + " after running for " + Duration.between(mainstart, finish).toMillis() + " ms");
+            totalRun += Duration.between(mainstart, finish).toMillis();
         }
+
+        System.out.println("The total runtime is " + totalRun + " ms");
     }
 
     public static void task(int id){
