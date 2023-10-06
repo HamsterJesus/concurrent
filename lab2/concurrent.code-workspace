@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "concurrent",
+			"path": ".."
+		},
+		{
+			"name": "lab02",
+			"path": "../../lab02"
+		},
+		{
+			"path": "../../lab03"
+		}
+	],
+	"settings": {}
+}
