@@ -1,5 +1,5 @@
 /* File: Example1_unsynchronizedExercise4.java    Starting point CM3113 Lab4 Exercise 1 */
-package lab03;
+package lab3;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -23,6 +23,7 @@ public class Example1_synchronized {
 
         for (;;) { // wake up main() occasionally and test state of counters
             AtomicLong count1, count2, countTotal = new AtomicLong();
+            long lost;
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
@@ -31,21 +32,14 @@ public class Example1_synchronized {
             /* capture state of current counts */
             synchronized(sharedCounter){
                 count1 = counter1.getCount();
-            }
-
-            synchronized(sharedCounter){
                 count2 = counter2.getCount();
-            }
-            
-            synchronized(sharedCounter){
                 countTotal = sharedCounter.getCount();
+                lost = count1.longValue() + count2.longValue() - countTotal.longValue();
             }
                 
-            
-
             System.out.println("Actual C1 + C2: " + (count1.longValue() + count2.longValue())
                     + ", Recorded C1 + C2 " + countTotal
-                    + ", Lost: " + (count1.longValue() + count2.longValue() - countTotal.longValue()));
+                    + ", Lost: " + lost);
         }
     }
     
@@ -62,7 +56,7 @@ public class Example1_synchronized {
             theCount.getAndIncrement();
         }
 
-        public AtomicLong getCount() {
+        public synchronized AtomicLong getCount() {
             return theCount;
         }
     }
@@ -85,8 +79,6 @@ public class Example1_synchronized {
             for (;;) {   // start of another loop
                 //try {Thread.sleep(10L);} catch (InterruptedException e) {}
                 synchronized(sharedCounter){
-
-                
                     thisCounter.increment();  // count one more loop for this thread 
                     sharedCounter.increment(); 
                 } // count one more loop for all threads

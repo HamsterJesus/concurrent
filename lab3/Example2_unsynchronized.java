@@ -1,4 +1,4 @@
-package lab03;
+package lab3;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -42,8 +42,7 @@ public class Example2_unsynchronized {
                 while (resource.longValue() > 0) {
                     takeResource();
                     //Thread.yield();
-                    useResource(); 
-                    Thread.yield();                   
+                    useResource();                    
                     /* Use of yield has no effect on logic of the code, 
                     * but it increase the non-safe
                     * effects observed by introducing more context switches */

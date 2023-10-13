@@ -1,5 +1,5 @@
 /* File: Example1_unsynchronizedExercise4.java    Starting point CM3113 Lab4 Exercise 1 */
-package lab03;
+package lab3;
 
 /**
  * This version of exercise 1 is unsynchronized. The version suffers from "lost
